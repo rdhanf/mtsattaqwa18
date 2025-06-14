@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalender Akademik MTs Attaqwa 18</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo-container">
+                    <img src="asset/img/attaqwa.png" alt="Logo MTs Attaqwa 18" class="logo">
+                    <h1>MTs Attaqwa 18 Tanah Tinggi</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Beranda</a></li>
+                    <li class="has-submenu">
+                        <a href="#">Profil <span class="arrow">▼</span></a>
+                        <ul class="submenu">
+                            <li><a href="profile.html#kata-sambutan">Kata Sambutan</a></li>
+                            <li><a href="profile.html#visi-misi">Visi & Misi Madrasah</a></li>
+                            <li><a href="profile.html#struktur-organisasi">Struktur Organisasi</a></li>
+                            <li><a href="profile.html#profile-guru">Profile Guru</a></li>
+                            <li><a href="profile.html#kegiatan-siswa">Kegiatan Siswa</a></li>
+                            <li><a href="profile.html#fasilitas">Fasilitas</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="gallery.html">Galeri</a></li>
+                    <li><a href="kalender.html" class="active">Kalender Akademik</a></li> <li><a href="ppdb.html">PPDB</a></li>
+                    <li><a href="contact.html">Kontak</a></li>
+                </ul>
+                <div class="burger-menu">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="calendar-section fade-in" id="kalender-akademik">
+            <div class="container">
+                <h2>Kalender Akademik & Kegiatan Siswa</h2>
+
+                <div class="calendar-nav">
+                    <button id="prevMonth" class="btn-primary">&lt; Sebelumnya</button>
+                    <h3 id="currentMonthYear">Juni 2025</h3> <button id="nextMonth" class="btn-primary">Selanjutnya &gt;</button>
+                </div>
+                
+                <div class="calendar-grid">
+                    <div class="day-name">Min</div>
+                    <div class="day-name">Sen</div>
+                    <div class="day-name">Sel</div>
+                    <div class="day-name">Rab</div>
+                    <div class="day-name">Kam</div>
+                    <div class="day-name">Jum</div>
+                    <div class="day-name">Sab</div>
+                    </div>
+
+                <div class="event-list-container">
+                    <h3>Daftar Kegiatan Bulan Ini</h3>
+                    <ul id="eventList" class="event-list">
+                        </ul>
+                    <p class="no-events" id="noEventsMessage" style="display: none;">Tidak ada kegiatan terjadwal untuk bulan ini.</p>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 MTs Attaqwa 18 Tanah Tinggi. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

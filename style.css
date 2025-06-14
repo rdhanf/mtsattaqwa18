@@ -1,0 +1,1560 @@
+/* --- Variables (Pastikan ini ada di bagian atas style.css Anda) --- */
+:root {
+    --primary-color: #2c3e50; /* Dark blue/grey for main elements */
+    --accent-color: #3498db; /* Blue for highlights/buttons */
+    --text-color: #333;
+    --light-text-color: #666;
+    --white: #ffffff;
+    --light-bg: #f8f9fa; /* Light background for sections */
+    --dark-bg: #2c3e50; /* Dark background for footer/mobile menu */
+    --border-radius: 8px;
+    --shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    --transition-speed: 0.3s;
+    --navbar-height: 80px; /* NEW: Define navbar height as a variable */
+}
+
+/* --- Base Styles (Pastikan ini ada) --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--light-bg);
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h1 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-align: center;
+}
+
+h2 {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+h3 {
+    color: var(--primary-color);
+    text-align: center;
+}
+
+p {
+    margin-bottom: 15px;
+    line-height: 1.7;
+    text-align: center; /* Ensure paragraphs are justified by default */
+}
+
+a {
+    text-decoration: none;
+    color: var(--accent-color);
+    transition: color var(--transition-speed) ease;
+}
+
+a:hover {
+    color: var(--primary-color);
+}
+
+.btn-primary {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: var(--white);
+    padding: 12px 25px;
+    border-radius: var(--border-radius);
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: background-color var(--transition-speed) ease, transform 0.2s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-2px);
+    color: var(--white);
+}
+
+/* --- Header (Navbar) --- */
+.navbar {
+    background-color: var(--white);
+    padding: 0;
+    box-shadow: var(--shadow);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    height: var(--navbar-height);
+    display: flex;
+    align-items: center;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    padding: 0 20px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    height: 65px;
+    width: auto;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.navbar h1 {
+    margin: 0;
+    color: var(--primary-color);
+    white-space: nowrap;
+    text-align: left;
+}
+
+/* Nav Links - Default for Desktop */
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin: 120px;
+    padding: 0;
+    gap: 20px;
+    align-items: center;
+}
+
+.nav-links > li > a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    padding: 8px 0;
+    position: relative;
+    transition: color var(--transition-speed) ease;
+}
+
+.nav-links > li > a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    background-color: var(--primary-color);
+    bottom: -5px;
+    left: 0;
+    transition: width var(--transition-speed) ease;
+}
+
+.nav-links > li > a:hover {
+    color: var(--primary-color);
+}
+
+.nav-links > li > a:hover::after,
+.nav-links > li > a.active::after {
+    width: 100%;
+}
+
+/* Submenu Styles (FOR DESKTOP) */
+.nav-links .has-submenu {
+    position: relative;
+    cursor: pointer;
+}
+
+.nav-links .submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--dark-bg);
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    min-width: 200px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    z-index: 1002;
+    transform: translateY(10px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+}
+
+.nav-links .has-submenu:hover .submenu {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.nav-links .submenu li a {
+    color: var(--white);
+    font-size: 0.95em;
+    padding: 10px 20px;
+    display: block;
+    text-align: left;
+    white-space: nowrap;
+    transition: background-color 0.2s ease;
+}
+
+.nav-links .submenu li a:hover {
+    background-color: var(--accent-color);
+    color: var(--white);
+}
+
+/* Burger Menu - Default: HIDDEN for Desktop */
+.burger-menu {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 25px;
+    height: 20px;
+    z-index: 1001;
+}
+
+.burger-menu div {
+    width: 25px;
+    height: 3px;
+    background-color: var(--primary-color);
+    transition: all var(--transition-speed) ease;
+}
+
+.burger-menu.active .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+.burger-menu.active .line2 {
+    opacity: 0;
+}
+.burger-menu.active .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* --- Main Sections --- */
+main section {
+    padding: 0px 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+main section:first-of-type {
+    margin-top: 0;
+}
+
+main section.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Hero Section (Beranda & Profile Main) --- */
+.hero-section {
+    background: linear-gradient(rgba(176, 182, 228, 0.2), rgba(14, 32, 32, 0.7)), url('asset/img/MTs\ Attaqwa\ 18.jpg') no-repeat center center/cover;
+    color: var(--white);
+    text-align: center;
+    padding: 120px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh;
+    margin-top: 0;
+}
+
+.hero-section h2 {
+    color: white;
+    font-size: 3em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.hero-section p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+/* Styling for Gallery Section */
+.gallery-section {
+    padding: 60px 0;
+    background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+    text-align: center; /* Untuk judul H2 */
+}
+
+.gallery-section h2 {
+    font-size: 2.8em; /* Ukuran font dari saran sebelumnya */
+    color: var(--primary-color);
+    margin-bottom: 40px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.gallery-section h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background-color: var(--secondary-color);
+    border-radius: 2px;
+}
+
+/* New CSS for Gallery Grid */
+.gallery-grid {
+    display: grid;
+    /* Membuat 3 kolom pada layar besar, fleksibel berdasarkan minmax */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px; /* Jarak antar gambar */
+    padding: 0 20px; /* Padding samping untuk grid */
+    max-width: 1200px; /* Lebar maksimum grid */
+    margin: 0 auto; /* Tengah grid di halaman */
+}
+
+.gallery-item {
+    background-color: var(--white);
+    border-radius: var(--border-radius); /* Menggunakan variabel yang ada */
+    overflow: hidden;
+    box-shadow: var(--shadow); /* Menggunakan variabel yang ada */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    text-align: center; /* Memusatkan teks di dalam item */
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); /* Efek bayangan saat hover */
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 250px; /* Tinggi tetap untuk gambar pada grid */
+    object-fit: cover; /* Memastikan gambar mengisi area tanpa terdistorsi */
+    display: block;
+    border-bottom: 1px solid var(--light-gray); /* Garis pemisah dari teks */
+    border-radius: var(--border-radius) var(--border-radius) 0 0; /* Hanya sudut atas yang dibulatkan */
+}
+
+.gallery-item p {
+    padding: 15px;
+    font-size: 1.1em;
+    color: var(--primary-color); /* Warna teks dari CSS asli Anda */
+    font-weight: 500; /* Dari CSS asli Anda */
+    margin-bottom: 0; /* Dari CSS asli Anda */
+    flex-grow: 1; /* Biarkan paragraf mengambil ruang yang tersisa */
+    display: grid;
+    align-items: center; /* Pusatkan teks vertikal */
+    justify-content: center; /* Pusatkan teks horizontal */
+}
+
+
+/* Responsive adjustments for the grid */
+@media (max-width: 992px) {
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 2 kolom pada tablet */
+        gap: 20px;
+    }
+    .gallery-section h2 {
+        font-size: 2.2em;
+    }
+}
+
+@media (max-width: 576px) {
+    .gallery-grid {
+        grid-template-columns: 1fr; /* 1 kolom pada ponsel */
+        padding: 0 15px;
+    }
+    .gallery-item img {
+        height: 200px; /* Sesuaikan tinggi gambar untuk layar kecil */
+    }
+    .gallery-section h2 {
+        font-size: 1.8em;
+    }
+}
+
+.rdm-section {
+    padding: 10px 0;
+    background-image: linear-gradient(to bottom, #00c9a7, #00d0e4, #52d0ff, #b3caff, #f3c5ff);
+    color: var(--dark-bg);
+}
+
+.rdm-section h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 2.5em;
+    color: var(--white);
+}
+
+.rdm-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 30px;
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.rdm-explanation {
+    flex: 2;
+    min-width: 300px;
+    max-width: 65%;
+    color: var(--text-color);
+}
+
+.rdm-explanation h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    text-align: left;
+}
+
+.rdm-explanation p {
+    text-align: justify;
+}
+
+.rdm-explanation ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.rdm-explanation ul li {
+    margin-bottom: 8px;
+}
+
+.rdm-action {
+    flex: 1;
+    min-width: 250px;
+    max-width: 30%;
+    background-color: var(--light-bg);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.rdm-action h3 {
+    margin-top: 0;
+    color: var(--accent-color);
+    text-align: center;
+}
+
+.rdm-action p {
+    text-align: center;
+}
+
+.rdm-access-btn {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 250px;
+}
+
+.rdm-action .note {
+    font-size: 0.9em;
+    color: var(--light-text-color);
+    margin-top: 15px;
+}
+
+/* --- Section Sisfoma --- */
+.sisfoma-section {
+    padding: 80px 0;
+    background-image: linear-gradient(to right top, #0ef82c, #00f761, #00f585, #00f2a2, #00eeb8, #00ecb6, #00eab3, #00e8b1, #1ee897, #3fe679, #5ce456, #77e027);
+}
+
+.sisfoma-section h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 2.5em;
+    color: var(--primary-color);
+}
+
+.sisfoma-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.sisfoma-text {
+    flex: 1;
+    min-width: 300px;
+    max-width: 55%;
+    line-height: 1.8;
+    color: var(--text-color);
+}
+
+.sisfoma-text p {
+    font-size: 1.15em;
+    margin-bottom: 25px;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.sisfoma-text .btn-primary {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.sisfoma-image {
+    flex: 1;
+    min-width: 250px;
+    max-width: 40%;
+    text-align: center;
+}
+
+.sisfoma-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    display: block;
+    margin: 0 auto;
+}
+
+/* --- PPDB Section --- */
+.ppdb-section {
+    background-image: linear-gradient(to right top, #845ec2, #965dc0, #a75dbe, #b75cbb, #c55cb7, #db5dad, #ee61a1, #fc6895, #ff7a7f, #ff926d, #ffac61, #ffc75f);
+    padding: 80px 0; /* Pastikan padding di sini */
+}
+
+.ppdb-info {
+    display: flex;
+    flex-wrap: none;
+    gap: 30px;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.info-card {
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 40px;
+    box-shadow: 6px 8px 12px 0px rgba(0,0,0,0.47);
+    -webkit-box-shadow: 6px 8px 12px 0px rgba(0,0,0,0.47);
+    -moz-box-shadow: 6px 8px 12px 0px rgba(0,0,0,0.47);
+    flex: 1;
+    min-width: 280px;
+    max-width: 350px;
+    text-align: left;
+}
+
+.info-card h3 {
+    color: var(--accent-color);
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.info-card p strong {
+    color: #28a745;
+}
+
+.info-card ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.info-card ul li {
+    margin-bottom: 8px;
+    position: relative;
+    padding-left: 20px;
+}
+
+.info-card ul li::before {
+    content: '✓';
+    color: var(--accent-color);
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.ppdb-section .btn-primary {
+    display: block;
+    margin: 0 auto;
+    max-width: 300px;
+    text-align: center;
+}
+
+
+/* ======================================= */
+/* --- NEW WRAPPER FOR NEWS AND CALENDAR --- */
+/* ======================================= */
+.news-and-calendar-wrapper {
+    padding: 80px 0; /* Padding untuk wrapper keseluruhan */
+    background-color: rgb(177, 115, 238);
+}
+
+/* Flex container untuk berita dan kalender */
+.news-and-calendar-wrapper .two-column-layout {
+    display: flex;
+    flex-wrap: wrap; /* Izinkan wrap pada layar kecil */
+    gap: 40px; /* Jarak antara kolom berita dan kalender */
+    align-items: flex-start; /* Align item ke atas */
+}
+
+/* --- NEWS SECTION (Ditempatkan di sini) --- */
+.news-section {
+    flex: 2; /* Berita akan mengambil lebih banyak ruang */
+    min-width: 450px; /* Lebar minimum untuk berita */
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.news-section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em; /* Sesuaikan ukuran h2 di sini */
+    color: var(--primary-color);
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.news-card {
+    background-color: var(--light-bg); /* Warna latar belakang untuk setiap kartu berita */
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.news-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    border-bottom: 1px solid #eee;
+}
+
+.news-card h3 {
+    padding: 15px 15px 5px 15px;
+    font-size: 1.1em;
+    color: var(--primary-color);
+    text-align: left; /* Berita judul rata kiri */
+    margin-bottom: 10px;
+}
+
+.news-card p {
+    padding: 0 15px 10px 15px;
+    font-size: 0.9em;
+    color: var(--light-text-color);
+    text-align: justify; /* Berita deskripsi rata kiri-kanan */
+    margin-bottom: 0;
+}
+
+.news-card .read-more {
+    display: block;
+    text-align: right;
+    padding: 0 15px 15px 15px;
+    font-size: 0.9em;
+    font-weight: 500;
+    color: var(--accent-color);
+}
+
+.news-card .read-more:hover {
+    color: var(--primary-color);
+}
+
+.view-all-news {
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+/* --- CALENDAR SECTION (Ditempatkan di sini) --- */
+.calendar-section {
+    flex: 1; /* Kalender akan mengambil ruang sisa */
+    min-width: 400px; /* Lebar minimum untuk kalender */
+    padding: 0; /* Padding section diatur oleh wrapper-nya */
+    background-color: transparent; /* Hilangkan background section */
+    box-shadow: none; /* Hilangkan shadow section */
+}
+
+.calendar-section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em; /* Sesuaikan ukuran h2 di sini */
+    color: var(--primary-color);
+}
+
+.calendar-container {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    max-width: none; /* Hilangkan max-width bawaan agar fleksibel dalam flexbox */
+    margin: 0; /* Hilangkan margin auto bawaan */
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Sesuaikan gap untuk tata letak bersebelahan */
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px; /* Kurangi margin bawah */
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.calendar-header button {
+    background-color: var(--accent-color);
+    color: var(--white);
+    border: none;
+    padding: 8px 12px; /* Lebih kecil */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em; /* Lebih kecil */
+    transition: background-color var(--transition-speed) ease;
+}
+
+.calendar-header button:hover {
+    background-color: var(--primary-color);
+}
+
+.calendar-header h2 {
+    margin: 0;
+    font-size: 1.5em; /* Lebih kecil agar muat */
+    color: var(--primary-color);
+    text-align: center;
+    white-space: nowrap; /* Cegah pecah baris */
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px; /* Lebih kecil */
+    text-align: center;
+    margin-bottom: 20px; /* Kurangi margin bawah */
+}
+
+.day-name {
+    font-weight: 600;
+    color: var(--accent-color);
+    padding: 8px 0; /* Lebih kecil */
+    background-color: rgba(52, 152, 219, 0.1);
+    border-radius: 5px;
+    font-size: 0.9em; /* Lebih kecil */
+}
+
+.calendar-day {
+    padding: 10px 5px; /* Lebih kecil */
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    background-color: var(--light-bg);
+    font-weight: 500;
+    color: var(--text-color);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 60px; /* Sesuaikan tinggi sel */
+    font-size: 0.85em; /* Lebih kecil */
+}
+
+.calendar-day.empty {
+    background-color: #f0f0f0;
+    border: 1px dashed #ccc;
+    color: #ccc;
+}
+
+.calendar-day.current-day {
+    background-color: var(--accent-color);
+    color: var(--white);
+    border-color: var(--accent-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.calendar-day.has-event {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.calendar-day.has-event::after {
+    content: '';
+    position: absolute;
+    bottom: 3px; /* Sesuaikan posisi dot */
+    width: 5px;
+    height: 5px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+}
+
+/* Event List Styles */
+/* H2 sudah diatur di .calendar-section h2 */
+
+.event-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.event-item {
+    background-color: var(--light-bg); /* Gunakan light-bg untuk item event agar berbeda dari container */
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    padding: 12px 15px; /* Lebih kecil */
+    margin-bottom: 10px; /* Lebih kecil */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Lebih tipis */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.event-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.event-item strong {
+    color: var(--accent-color);
+    font-size: 1em; /* Lebih kecil */
+    display: block;
+    margin-bottom: 3px; /* Lebih kecil */
+}
+
+.event-item p {
+    font-size: 0.9em; /* Lebih kecil */
+    color: var(--light-text-color);
+    text-align: left;
+    margin-bottom: 0;
+}
+
+#noEventsMessage {
+    text-align: center;
+    color: var(--light-text-color);
+    font-style: italic;
+    padding: 15px; /* Lebih kecil */
+    background-color: var(--light-bg);
+    border-radius: var(--border-radius);
+    margin-top: 15px; /* Lebih kecil */
+}
+
+
+/* --- Contact Section --- */
+.contact-section {
+    background-image: linear-gradient(315deg, rgba(239, 251, 70, 1) 0%, rgba(51, 138, 215, 1) 100%);
+    block-size: 300% 300%;
+    animation: color 12s ease-in-out infinite;
+}
+@keyframes color{
+    0%{
+        background-position: 0 50%;
+    }
+    50%{
+        background-position: 100% 50%;
+    }
+    10%{
+        background-position: 0 50%;
+    }
+}
+
+.contact-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: space-between;
+}
+
+.contact-info {
+    flex: 1;
+    min-width: 300px;
+    color: var(--white);
+}
+
+.contact-info h2 {
+    color: var(--white);
+}
+
+.contact-info h3 {
+    color: var(--white);
+    text-align: left;
+}
+
+.contact-info p {
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.social-links {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.social-links img {
+    width: 50px;
+    height: 50px;
+    transition: transform 0.2s ease;
+}
+
+.social-links img:hover {
+    transform: scale(1.1);
+}
+
+.contact-form {
+    flex: 1.5;
+    min-width: 300px;
+    background-color: var(--light-bg);
+    padding: 30px;
+    box-shadow: 6px 8px 12px 0px rgba(0,0,0,0.47);
+    -webkit-box-shadow: 6px 8px 12px 0px rgba(0,0,0,0.47);
+    -moz-box-shadow: 6px 8px 12px 0px rgba(0,0,0,0.47);
+    border-radius: 40px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--primary-color);
+    text-align: left;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    outline: none;
+}
+
+.contact-form .btn-primary {
+    width: auto;
+    margin: 0;
+}
+
+.map-container {
+    margin-top: 40px;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 450px;
+    border: 0;
+}
+
+/* --- Footer --- */
+footer {
+    background-color: var(--dark-bg);
+    color: var(--white);
+    text-align: center;
+    padding: 25px 0;
+    font-size: 0.9em;
+}
+
+
+/* ======================================= */
+/* --- NEW STYLES FOR PROFILE PAGE --- */
+/* ======================================= */
+.profile-sub-section {
+    padding: 60px 0;
+    background-color: var(--white);
+}
+
+.profile-sub-section:nth-of-type(odd) {
+    background-color: var(--light-bg);
+}
+
+.profile-sub-section h2 {
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* Kata Sambutan Kepala Sekolah */
+#kata-sambutan .content-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: center;
+}
+
+#kata-sambutan .image-wrapper {
+    flex: 1;
+    min-width: 250px;
+    text-align: center;
+}
+
+#kata-sambutan img {
+    max-width: 300px;
+    height: auto;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 10px;
+}
+
+#kata-sambutan .image-caption {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 0;
+}
+
+#kata-sambutan .text-content {
+    flex: 2;
+    min-width: 300px;
+}
+#kata-sambutan .text-content p {
+    text-align: justify;
+}
+
+/* Struktur Organisasi */
+.organization-chart {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.organization-chart img.responsive-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto 30px auto;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+/* Profile Guru */
+.teacher-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.teacher-card {
+    background-color: var(--white);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.teacher-card h3 {
+    color: var(--primary-color);
+}
+
+.teacher-card p {
+    text-align: center;
+}
+
+.teacher-card img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--accent-color);
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.teacher-card h3 {
+    margin-bottom: 5px;
+    font-size: 1.3em;
+    color: var(--primary-color);
+}
+
+.teacher-card p {
+    font-size: 0.95em;
+    color: var(--light-text-color);
+    margin-bottom: 5px;
+}
+
+.teacher-card .bio {
+    font-style: italic;
+    font-size: 0.85em;
+    color: #888;
+    margin-top: 10px;
+}
+
+/* Kegiatan Siswa */
+.activity-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.activity-card {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    text-align: center;
+}
+
+.activity-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.activity-card h3 {
+    margin: 15px 15px 5px 15px;
+    font-size: 1.2em;
+    color: var(--primary-color);
+}
+
+.activity-card p {
+    padding: 0 15px 15px;
+    font-size: 0.95em;
+    color: var(--light-text-color);
+    margin-bottom: 0;
+    text-align: justify;
+}
+
+/* Fasilitas */
+.facility-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.facility-item {
+    background-color: var(--white);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.facility-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+    margin-bottom: 10px;
+}
+
+.facility-item p {
+    font-weight: 500;
+    color: var(--primary-color);
+    font-size: 1em;
+    margin-bottom: 0;
+}
+
+
+/* ======================================= */
+/* --- Responsive Adjustments (Media Queries) --- */
+/* ======================================= */
+@media (max-width: 992px) {
+    .navbar .container {
+        padding: 0 20px;
+    }
+    .navbar h1 {
+        font-size: 1.4em;
+        white-space: normal;
+        text-align: left;
+        line-height: 1.2;
+    }
+    .logo {
+        height: 45px;
+    }
+    .logo-container {
+        gap: 10px;
+        flex-shrink: 1;
+    }
+
+    .burger-menu {
+        display: flex;
+    }
+    .burger-menu div {
+        background-color: var(--primary-color);
+    }
+
+    .nav-links {
+        display: none;
+        position: fixed;
+        right: 0;
+        top: var(--navbar-height);
+        height: calc(100vh - var(--navbar-height));
+        background-color: var(--dark-bg);
+        flex-direction: column;
+        align-items: center;
+        width: 60%;
+        transform: translateX(100%);
+        transition: transform var(--transition-speed) ease-in-out;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+        padding-top: 20px;
+        z-index: 999;
+        overflow-y: auto;
+    }
+
+    .nav-links.active {
+        transform: translateX(0);
+    }
+
+    .nav-links > li {
+        width: 100%;
+        text-align: center;
+        margin: 15px 0;
+        position: relative;
+    }
+
+    .nav-links > li > a {
+        color: var(--white);
+        font-size: 1.2em;
+        padding: 5px 0;
+        display: block;
+    }
+
+    .nav-links > li > a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: var(--accent-color);
+    }
+    .nav-links > li > a::after {
+        display: none;
+    }
+
+    .nav-links .submenu {
+        position: static;
+        background-color: rgba(0, 0, 0, 0.3);
+        width: 90%;
+        margin: 10px auto;
+        border-radius: var(--border-radius);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease-out;
+        box-shadow: none;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+    }
+    .nav-links .submenu.active {
+        max-height: 500px;
+        padding: 10px 0;
+    }
+
+    .nav-links .submenu li a {
+        color: var(--white);
+        font-size: 0.95em;
+        padding: 10px 20px;
+        display: block;
+        text-align: center;
+    }
+
+    main section {
+        padding: 60px 0;
+        margin-top: 0;
+    }
+    main section:first-of-type:not(.hero-section) {
+        margin-top: var(--navbar-height);
+    }
+
+    .hero-section h2 {
+        font-size: 2.2em;
+    }
+    .hero-section p {
+        font-size: 1em;
+    }
+
+    .rdm-content, .sisfoma-content, .ppdb-info, .contact-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .rdm-explanation, .rdm-action,
+    .sisfoma-text, .sisfoma-image,
+    .info-card, .contact-info, .contact-form {
+        min-width: auto;
+        width: 100%;
+        max-width: none;
+    }
+
+    .rdm-explanation h3,
+    .rdm-explanation p,
+    .rdm-explanation ul,
+    .rdm-explanation ul li,
+    .sisfoma-text p,
+    .ppdb-info .info-card,
+    .ppdb-info .info-card h3,
+    .contact-info p,
+    .contact-info h3,
+    .contact-form label,
+    #kata-sambutan .text-content p,
+    .activity-card p,
+    .event-item p,
+    .news-card h3, /* Tambahan untuk berita */
+    .news-card p /* Tambahan untuk berita */
+    {
+        text-align: left;
+    }
+    .rdm-action, .sisfoma-image, .ppdb-section .btn-primary, .teacher-card, .activity-card, .facility-item,
+    .news-card .read-more /* Tambahan untuk berita */
+    {
+        text-align: center;
+    }
+
+    .gallery-item img {
+        height: 350px;
+    }
+
+    #kata-sambutan .content-wrapper {
+        flex-direction: column;
+    }
+    #kata-sambutan .image-wrapper {
+        order: -1;
+    }
+    #kata-sambutan img {
+        max-width: 50%;
+    }
+    .teacher-grid, .activity-grid, .facility-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+    }
+
+    /* News and Calendar Wrapper responsive adjustments */
+    .news-and-calendar-wrapper .two-column-layout {
+        flex-direction: column; /* Stack them vertically on smaller screens */
+        gap: 60px; /* Jarak antar section saat vertikal */
+    }
+    .news-section, .calendar-section {
+        min-width: auto;
+        flex: none; /* Hilangkan flex agar tidak mempengaruhi lebar */
+        width: 100%; /* Ambil lebar penuh */
+    }
+    .news-section {
+        padding: 20px; /* Kurangi padding berita */
+    }
+    .calendar-container {
+        padding: 20px; /* Kurangi padding kalender */
+    }
+    .news-section h2, .calendar-section h2 {
+        font-size: 2em; /* Atur ulang ukuran h2 di sini */
+    }
+
+    /* Calendar Specific Media Queries */
+    .calendar-container {
+        padding: 20px;
+    }
+    .calendar-grid {
+        gap: 5px;
+    }
+    .calendar-day {
+        min-height: 60px;
+        font-size: 0.9em;
+        padding: 8px 5px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar h1 {
+        font-size: 1.2em;
+    }
+    .logo {
+        height: 40px;
+    }
+    .nav-links {
+        display: none; /* Sembunyikan secara default */
+        position: fixed; /* Atau absolute */
+        top: 0; /* Atau tinggi header Anda */
+        left: 0;
+        width: 100%;
+        height: 100vh; /* Atau auto */
+        background-color: var(--dark-bg); /* Latar belakang menu mobile */
+        flex-direction: column; /* Untuk menumpuk item menu */
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .hero-section {
+        padding: 80px 0;
+    }
+    .hero-section h2 {
+        font-size: 1.8em;
+    }
+    .gallery-item img {
+        height: 300px;
+    }
+    .map-container iframe {
+        height: 350px;
+    }
+    .teacher-grid, .activity-grid, .facility-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+    }
+
+    /* News specific */
+    .news-grid {
+        grid-template-columns: 1fr; /* Stack news cards on smaller screens */
+        gap: 20px;
+    }
+    .news-card h3 {
+        font-size: 1em;
+    }
+    .news-card p {
+        font-size: 0.85em;
+    }
+
+    /* Calendar Specific Media Queries */
+    .calendar-header h2 {
+        font-size: 1.5em;
+    }
+    .calendar-day {
+        min-height: 50px;
+        font-size: 0.8em;
+    }
+    .day-name {
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar .container {
+        padding: 0 15px;
+    }
+    .navbar h1 {
+        font-size: 1em;
+        max-width: 250px;
+    }
+    .logo {
+        height: 35px;
+    }
+    .logo-container {
+        gap: 8px;
+    }
+    .nav-links {
+        width: 80%;
+    }
+    .hero-section {
+        padding: 60px 0;
+        min-height: 70vh;
+    }
+    .hero-section h2 {
+        font-size: 1.5em;
+    }
+    .hero-section p {
+        font-size: 0.9em;
+    }
+    .btn-primary {
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
+    h2 {
+        font-size: 1.8em;
+        margin-bottom: 30px;
+    }
+    .gallery-item img {
+        height: 250px;
+    }
+    .map-container iframe {
+        height: 250px;
+    }
+    .social-links img {
+        width: 25px;
+        height: 25px;
+    }
+    .teacher-grid, .activity-grid, .facility-grid {
+        grid-template-columns: 1fr;
+    }
+    .teacher-card img {
+        width: 120px;
+        height: 120px;
+    }
+
+    /* News specific */
+    .news-card img {
+        height: 150px;
+    }
+    .news-card h3 {
+        font-size: 0.95em;
+    }
+    .news-card p {
+        font-size: 0.8em;
+    }
+    .news-card .read-more {
+        font-size: 0.8em;
+    }
+
+    /* Calendar Specific Media Queries */
+    .calendar-header h2 {
+        font-size: 1.2em;
+    }
+    .calendar-header button {
+        padding: 8px 10px;
+        font-size: 0.9em;
+    }
+    .calendar-day {
+        min-height: 40px;
+        font-size: 0.75em;
+        padding: 5px;
+    }
+    .day-name {
+        font-size: 0.8em;
+    }
+    .event-item {
+        padding: 12px 15px;
+    }
+    .event-item strong {
+        font-size: 1em;
+    }
+    .event-item p {
+        font-size: 0.9em;
+    }
+}
